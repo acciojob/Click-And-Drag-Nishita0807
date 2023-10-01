@@ -36,6 +36,35 @@
 
 <script>
 //Your code goes here 
+	  const items = document.querySelector('.items');
+  let isDragging = false;
+  let startPositionX;
+  let scrollLeft;
+
+  items.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    items.classList.add('active');
+    startPositionX = e.pageX - items.offsetLeft;
+    scrollLeft = items.scrollLeft;
+  });
+
+  items.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - items.offsetLeft;
+    const scrollX = x - startPositionX;
+    items.scrollLeft = scrollLeft - scrollX;
+  });
+
+  items.addEventListener('mouseup', () => {
+    isDragging = false;
+    items.classList.remove('active');
+  });
+
+  items.addEventListener('mouseleave', () => {
+    isDragging = false;
+    items.classList.remove('active');
+  });
 </script>
 
   </body>
